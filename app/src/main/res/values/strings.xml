@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Our diary</string>
+    <string name="textSignUp">新規登録</string>
+    <string name="textLogin">メールアドレスでログイン</string>
+    <string name="btnLogin">ログイン</string>
+</resources>
