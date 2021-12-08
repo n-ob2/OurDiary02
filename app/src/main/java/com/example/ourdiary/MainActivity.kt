@@ -2,70 +2,92 @@ package com.example.ourdiary
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 class MainActivity : AppCompatActivity() {
-    private var emailLogin: EditText? = null
-    private var passLogin: EditText? = null
-    private val mAuth: FirebaseAuth? = null
+
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        emailLogin = findViewById(R.id.editTextLoginEmail);
-        passLogin = findViewById(R.id.editTextLoginPassword);
+        auth = FirebaseAuth.getInstance()
+
+        val buttonSignUp = findViewById<Button>(R.id.btnSignUp)
+        val buttonLogin = findViewById<Button>(R.id.btnLogin)
+
+        buttonSignUp.setOnClickListener {
+            val emailEditText = findViewById<EditText>(R.id.editEmail)
+            val emailText = emailEditText.text.toString()
+            val passEditText = findViewById<EditText>(R.id.editPassword)
+            val passText = passEditText.text.toString()
+
+            auth.createUserWithEmailAndPassword(emailText, passText)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            baseContext, "SignUp 成功",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            baseContext, "SignUp 失敗",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
+
+        buttonLogin.setOnClickListener {
+
+            val emailEditText = findViewById<EditText>(R.id.editEmail)
+            val emailText = emailEditText.text.toString()
+
+            val passEditText = findViewById<EditText>(R.id.editPassword)
+            val passText = passEditText.text.toString()
+
+            auth.signInWithEmailAndPassword(emailText, passText)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            baseContext, "Login 成功",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            baseContext, "Login 失敗",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
 
     }   //onCreate ↑↑
 
 
+
+
+
+
     override fun onStart() {
         super.onStart()
-        val currentUser = mAuth?.currentUser
-        updateUI(currentUser)
+
     }   //onStart↑↑
 
-    fun updateUI(user: FirebaseUser?) {
-        /*
-        if (user == null) {
-            labelView.setText("no login...")
-        } else {
-            labelView.setText("login: " + user.email)
-        }
-         */
-    }
+    fun doSignUp(view: View?){
+
+    }//doSignUp↑↑
+
+
 
     fun doLogin(view: View?) {
-        val email: String = emailLogin?.getText().toString() + ""
-        val password: String = passLogin?.getText().toString() + ""
-        Toast.makeText(
-            this@MainActivity, "Login start.",
-            Toast.LENGTH_SHORT
-        ).show()
-        mAuth!!.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        this@MainActivity, "Logined!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val user = mAuth.currentUser
-                    updateUI(user)
-                } else {
-                    Toast.makeText(
-                        this@MainActivity, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
-                }
-            }
     }   //doLogin↑↑
 
 }
