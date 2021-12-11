@@ -3,4 +3,11 @@
     <string name="textSignUp">新規登録</string>
     <string name="textLogin">メールアドレスでログイン</string>
     <string name="btnLogin">ログイン</string>
+    <string name="textResetPass"><u>パスワードを忘れた方はコチラ</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textTitleResetPass">パスワードリセット</string>
+    <string name="textResetPass_exp">登録したメールアドレスにリセット用URLを送信します。</string>
+    <string name="textSendMail">メールを送る</string>
+    <string name="textToLoginMenu"><u>ログイン画面へ</u></string>
 </resources>
