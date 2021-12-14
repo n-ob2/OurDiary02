@@ -11,4 +11,8 @@
     <string name="textSendMail">メールを送る</string>
     <string name="textToLoginMenu"><u>ログイン画面へ</u></string>
     <string name="textZatsugakuTitle">今日のざつがく</string>
+    <string name="textUser">＜ユーザー名＞ の日記</string>
+    <string name="textGoToCalendar"><u>カレンダーへ</u></string>
+    <string name="textPrev">&lt;&lt; <u>mm/dd</u></string>
+    <string name="textNext"><u>mm/dd</u> &gt;&gt;</string>
 </resources>
