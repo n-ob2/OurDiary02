@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonLogin.setOnClickListener {    //ログイン
+            /*
             auth.signInWithEmailAndPassword(emailText, passText)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+             */
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
         }
 
     }   //onCreate ↑↑

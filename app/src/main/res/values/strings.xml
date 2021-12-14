@@ -10,4 +10,5 @@
     <string name="textResetPass_exp">登録したメールアドレスにリセット用URLを送信します。</string>
     <string name="textSendMail">メールを送る</string>
     <string name="textToLoginMenu"><u>ログイン画面へ</u></string>
+    <string name="textZatsugakuTitle">今日のざつがく</string>
 </resources>
