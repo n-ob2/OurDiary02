@@ -36,22 +36,18 @@ class DiaryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val db = FirebaseFirestore.getInstance()
-        diary = db.collection("diary")
+        var diary = db.collection("diary")
 
         diary.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
-                for (document in task.result) {
+                var result = ""
+                for (document in task.result!!) {
                     val data = document.data
-                    binding.textDate.setText(data?.date)
-                    binding.textTitle.setText(data?.title)
-                    binding.textSentence.setText(data?.sentence)
-                    /*
-                    result += (data["name"].toString() + " ["
-                            + data["mail"].toString() + ":"
-                            + data["age"].toString() + "]\n")
-                     */
+                    result += (data["title"].toString() + " ["
+                            + data["sentence"].toString() + "]\n")
                 }
-                //dateText?.setText(result)
+                binding.textTitle.setText(result)
+                //binding.textSentence.setText(data?.sentence)
             } else {
                 dateText?.setText("データが読み込めません。")
             }

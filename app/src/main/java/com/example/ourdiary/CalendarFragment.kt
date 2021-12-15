@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentCalendarBinding
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
-
 
 
 class CalenderFragment : Fragment() {
@@ -15,8 +19,27 @@ class CalenderFragment : Fragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
+    private var db: FirebaseFirestore? = null
+    private var diary: CollectionReference? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //FirebaseApp.initializeApp(this)
+        val db = Firebase.firestore
+        diary = db.collection("diary")
+
+        diary!!.addSnapshotListener { snapshot, e ->
+            var result = ""
+            val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
+            while (items.hasNext()) {
+                val docdata = items.next()
+                val data = docdata.data
+                result += """${data["date"]}"""
+            }
+            //データベースの日付を取得してやりたいこと
+            //カレンダーでタップされた日付をインテントで渡して、該当の日記の内容を表示？
+        }
 
     }
 
@@ -28,6 +51,7 @@ class CalenderFragment : Fragment() {
         return binding.root
     }   //onCreateView↑↑
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -36,10 +60,22 @@ class CalenderFragment : Fragment() {
             timeInMillis = binding.calendarView.date
         }
 
+        findDiary(
+            dateTime.get(Calendar.YEAR),
+            dateTime.get(Calendar.MONTH),
+            dateTime.get(Calendar.DAY_OF_MONTH)
+        )
+
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             changeDate(year, month, dayOfMonth)
+            findDiary(year, month, dayOfMonth)
         }
     }   //onViewCreated↑↑
+
+    private fun findDiary(year: Int, month: Int, dayOfMonth: Int) {
+        //カレンダーでタップされた日付をインテントで渡して、データベースで該当の日記の内容を表示？
+    }
+
 
     private fun changeDate(year: Int, month: Int, dayOfMonth: Int) {
         var selectDate = Calendar.getInstance().apply {
@@ -47,14 +83,16 @@ class CalenderFragment : Fragment() {
             set(year, month, dayOfMonth)
         }
 
-        fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
-
-        fun onDestroy() {
-            super.onDestroy()
-            //return.close()
-        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //return.close()
+    }
+
 }
