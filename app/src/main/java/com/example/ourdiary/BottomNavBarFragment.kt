@@ -26,10 +26,6 @@ class BottomNavBarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.menu1.setOnClickListener{
-
-        }
-
 
     }
 
