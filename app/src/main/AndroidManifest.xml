@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OurDiary">
-        <activity android:name=".DiaryActivity"></activity>
+        <activity android:name=".EditDiaryActivity"></activity>
+        <activity android:name=".DiaryActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".PasswordlessActivity" />
         <activity
