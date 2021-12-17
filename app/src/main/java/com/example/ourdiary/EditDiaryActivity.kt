@@ -3,6 +3,7 @@ package com.example.ourdiary
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -10,6 +11,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+
 
 class EditDiaryActivity : AppCompatActivity() {
 
@@ -55,10 +57,20 @@ class EditDiaryActivity : AppCompatActivity() {
         data["sentence"] = sen
         diary!!.add(data)
             .addOnSuccessListener(OnSuccessListener<DocumentReference?> {
-
+                Toast.makeText(
+                    this@EditDiaryActivity, "日記を更新しました!",
+                    Toast.LENGTH_SHORT
+                ).show()
             })
             .addOnFailureListener(OnFailureListener {
-
+                Toast.makeText(
+                    this@EditDiaryActivity, "更新できませんでした。",
+                    Toast.LENGTH_SHORT
+                ).show()
             })
     }
+
+
+
+
 }
