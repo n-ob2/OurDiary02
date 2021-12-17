@@ -5,15 +5,19 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ourdiary.databinding.ActivityEditDiaryBinding
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class EditDiaryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEditDiaryBinding
 
     private var dateText: EditText? = null
     private var titleText: EditText? = null
@@ -25,7 +29,10 @@ class EditDiaryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_diary)
+        binding = ActivityEditDiaryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.buttonConf.setOnClickListener{ doConfirm(it) }
 
         dateText = findViewById(R.id.editTextDate)
         titleText = findViewById(R.id.editTextTitle)
@@ -40,17 +47,30 @@ class EditDiaryActivity : AppCompatActivity() {
             while (items.hasNext()) {
                 val docdata = items.next()
                 val data = docdata.data
-                result += """${data["date"].toString()}$ {data["title"].toString()} ${data["sentence"].toString()}
+                result += """${data["date"].toString()} ${data["title"].toString()} ${data["sentence"].toString()}
 """
             }
             dataText?.setText(result)
         }
     }   //onCreate↑↑
 
+    /*
+    private fun String.toDate(pattern: String = "yyyy/MM/dd"): Date?{
+        return try{
+            SimpleDateFormat(pattern).parse(this)
+        } catch (e: IllegalThreadStateException){
+            return null
+        } catch (e: ParseException){
+            return null
+        }
+    }
+
+     */
+
     private fun doConfirm(view: View?) {
-        val date: String = dateText!!.getText().toString() + ""//(dateText!!.getText().toString() + "").toInt()
-        val tit: String = titleText!!.getText().toString() + ""
-        val sen: String = sentenceText!!.getText().toString() + ""
+        val date: String = dateText!!.getText().toString()
+        val tit: String = titleText!!.getText().toString()
+        val sen: String = sentenceText!!.getText().toString()
         val data: MutableMap<String, Any> = HashMap()
         data["date"] = date
         data["title"] = tit
