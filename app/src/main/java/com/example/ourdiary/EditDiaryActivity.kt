@@ -54,6 +54,16 @@ class EditDiaryActivity : AppCompatActivity() {
         }
     }   //onCreate↑↑
 
+    override fun onStart() {
+        super.onStart()
+
+        binding.editTextDate.setOnClickListener {
+            DateDialog{ date ->
+                binding.editTextDate.setText(date)
+            } .show( parentFragmentManager, "date_dialog")
+        }
+    }
+
     /*
     private fun String.toDate(pattern: String = "yyyy/MM/dd"): Date?{
         return try{
