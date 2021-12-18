@@ -52,16 +52,19 @@ class EditDiaryActivity : AppCompatActivity() {
             }
             dataText?.setText(result)
         }
+
     }   //onCreate↑↑
+
+    fun showDateDialog(view:View){
+        DateDialog{ date ->
+            binding.editTextDate.setText(date)
+        } .show( supportFragmentManager, "date_dialog")
+    }
 
     override fun onStart() {
         super.onStart()
 
-        binding.editTextDate.setOnClickListener {
-            DateDialog{ date ->
-                binding.editTextDate.setText(date)
-            } .show( parentFragmentManager, "date_dialog")
-        }
+
     }
 
     /*
