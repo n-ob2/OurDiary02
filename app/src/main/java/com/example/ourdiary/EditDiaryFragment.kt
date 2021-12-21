@@ -1,14 +1,12 @@
 package com.example.ourdiary
 
 import android.os.Bundle
-import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.ourdiary.databinding.ActivityEditDiaryBinding
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -17,9 +15,9 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
-private const val DATE_RES_ID = "DATE_RES_ID"
-private const val TITLE_RES_ID = "TITLE_RES_ID"
-private const val SENTENCE_RES_ID = "SENTENCE_RES_ID"
+private var DATE_RES_ID = "DATE_RES_ID"
+private var TITLE_RES_ID = "TITLE_RES_ID"
+private var SENTENCE_RES_ID = "SENTENCE_RES_ID"
 
 
 class EditDiaryFragment : Fragment() {
@@ -34,10 +32,18 @@ class EditDiaryFragment : Fragment() {
     private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
 
+    //arguments用のリソースID
+    private var dateResId: String? = null
+    private var titleResId: String? = null
+    private var sentenceResId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         arguments?.let {
-            dateText = it.getString()
+            dateResId = it.getString(DATE_RES_ID)
+            titleResId = it.getString(TITLE_RES_ID)
+            sentenceResId = it.getString(SENTENCE_RES_ID)
         }
 
         binding.buttonConf.setOnClickListener{ doConfirm(it) }
@@ -95,14 +101,14 @@ class EditDiaryFragment : Fragment() {
         diary!!.add(data)
             .addOnSuccessListener(OnSuccessListener<DocumentReference?> {
                 Toast.makeText(
-                    this@EditDiaryFragment, "日記を更新しました!",
+                    context, "日記を更新しました!",
                     Toast.LENGTH_SHORT
                 ).show()
 
             })
             .addOnFailureListener(OnFailureListener {
                 Toast.makeText(
-                    this@EditDiaryFragment, "更新できませんでした。",
+                    context, "更新できませんでした。",
                     Toast.LENGTH_SHORT
                 ).show()
             })
@@ -117,7 +123,11 @@ class EditDiaryFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             EditDiaryFragment().apply {
-                putString(DATE_RES_ID, date )
+                arguments = Bundle().apply{
+                    putString(DATE_RES_ID, dateText.toString())
+                    putString(TITLE_RES_ID, titleText.toString())
+                    putString(SENTENCE_RES_ID, sentenceText.toString())
+                }
             }
     }
 }
