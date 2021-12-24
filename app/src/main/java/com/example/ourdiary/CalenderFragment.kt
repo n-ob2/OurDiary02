@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ourdiary.databinding.FragmentCalendarBinding
+import com.example.ourdiary.databinding.FragmentCalenderBinding
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
@@ -16,7 +16,7 @@ import java.util.*
 
 class CalenderFragment : Fragment() {
 
-    private var _binding: FragmentCalendarBinding? = null
+    private var _binding: FragmentCalenderBinding? = null
     private val binding get() = _binding!!
 
     private var db: FirebaseFirestore? = null
@@ -47,7 +47,7 @@ class CalenderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
+        _binding = FragmentCalenderBinding.inflate(inflater, container, false)
         return binding.root
     }   //onCreateView↑↑
 

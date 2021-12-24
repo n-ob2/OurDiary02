@@ -7,7 +7,7 @@
     tools:context=".EditDiaryActivity">
     
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView3"
+        android:id="@+id/fragmentEditDiaryContainer"
         android:name="com.example.ourdiary.EditDiaryFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"

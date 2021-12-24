@@ -7,11 +7,18 @@ import com.example.ourdiary.databinding.ActivityEditDiaryBinding
 
 class EditDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditDiaryBinding
+    private lateinit var editDiary: EditDiaryFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditDiaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        editDiary = EditDiaryFragment()
+        supportFragmentManager.beginTransaction().apply{
+            replace(R.id.fragmentEditDiaryContainer, editDiary)
+            commit()
+        }
 
     }   //onCreate↑↑
 

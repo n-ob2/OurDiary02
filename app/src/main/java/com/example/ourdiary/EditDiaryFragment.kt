@@ -14,11 +14,11 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-
+/*
 private var DATE_RES_ID = "DATE_RES_ID"
 private var TITLE_RES_ID = "TITLE_RES_ID"
 private var SENTENCE_RES_ID = "SENTENCE_RES_ID"
-
+*/
 
 class EditDiaryFragment : Fragment() {
     private var _binding: FragmentEditDiaryBinding? = null
@@ -33,18 +33,23 @@ class EditDiaryFragment : Fragment() {
     private var diary: CollectionReference? = null
 
     //arguments用のリソースID
+    /*
     private var dateResId: String? = null
     private var titleResId: String? = null
     private var sentenceResId: String? = null
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        /*
         arguments?.let {
             dateResId = it.getString(DATE_RES_ID)
             titleResId = it.getString(TITLE_RES_ID)
             sentenceResId = it.getString(SENTENCE_RES_ID)
         }
+
+         */
 
         binding.buttonConf.setOnClickListener{ doConfirm(it) }
 
@@ -80,8 +85,6 @@ class EditDiaryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
     }
 
     fun showDateDialog(view:View){
@@ -119,6 +122,7 @@ class EditDiaryFragment : Fragment() {
         _binding = null
     }
 
+    /*
     companion object{
         @JvmStatic
         fun newInstance() =
@@ -130,4 +134,6 @@ class EditDiaryFragment : Fragment() {
                 }
             }
     }
+
+     */
 }

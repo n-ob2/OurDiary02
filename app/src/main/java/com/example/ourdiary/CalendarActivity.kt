@@ -7,6 +7,7 @@ import com.example.ourdiary.databinding.ActivityCalendarBinding
 
 class CalendarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalendarBinding
+    private lateinit var calendar: CalenderFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,6 +15,12 @@ class CalendarActivity : AppCompatActivity() {
 
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        calendar = CalenderFragment()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainerView2, calendar)
+            commit()
+        }
 
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, EditDiaryActivity::class.java)
