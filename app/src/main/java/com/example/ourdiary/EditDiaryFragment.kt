@@ -8,12 +8,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+
 /*
 private var DATE_RES_ID = "DATE_RES_ID"
 private var TITLE_RES_ID = "TITLE_RES_ID"
@@ -25,11 +23,13 @@ class EditDiaryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var dateText: EditText? = null
+    private var feelingText: String? = null
     private var titleText: EditText? = null
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
 
-    private var db: FirebaseFirestore? =null
+
+    private var db: FirebaseFirestore? = null
     private var diary: CollectionReference? = null
 
     //arguments用のリソースID
@@ -50,11 +50,6 @@ class EditDiaryFragment : Fragment() {
         }
 
          */
-        /*
-        dateText = findViewById(R.id.editTextDate)
-        titleText = findViewById(R.id.editTextTitle)
-        sentenceText = findViewById(R.id.editTextSentence)
-         */
 
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
@@ -65,7 +60,7 @@ class EditDiaryFragment : Fragment() {
             while (items.hasNext()) {
                 val docdata = items.next()
                 val data = docdata.data
-                result += """${data["date"].toString()} ${data["title"].toString()} ${data["sentence"].toString()}
+                result += """${data["date"].toString()} ${data["feeling"].toString()} ${data["title"].toString()} ${data["sentence"].toString()}
 """
             }
             dataText?.setText(result)
@@ -78,43 +73,57 @@ class EditDiaryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentEditDiaryBinding.inflate(inflater, container, false)
-        binding.buttonConf.setOnClickListener { doConfirm(it)}
+        binding.buttonConf.setOnClickListener { doConfirm(it) }
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_edit_diary, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        //各気分のラジオボタンが選ばれた時に変数feelingTextに値を代入
+        binding.radioGroupFeelings.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonHappy ->  feelingText = "happy"
+                R.id.radioButtonSmile -> feelingText = "smile"
+                R.id.radioButtonSoso -> feelingText = "soso"
+                R.id.radioButtonAngry -> feelingText = "angry"
+                else -> feelingText = "sad"
+            }
+        }
     }
 
-    fun showDateDialog(view:View){
-        DateDialog{ date ->
+
+    fun showDateDialog( view:View ) {
+        DateDialog { date ->
             binding.editTextDate.setText(date)
-        } .show( parentFragmentManager, "date_dialog")
+        }.show(parentFragmentManager, "date_dialog")
     }
 
     private fun doConfirm(view: View?) {
-        val date: String = dateText!!.getText().toString()
-        val tit: String = titleText!!.getText().toString()
-        val sen: String = sentenceText!!.getText().toString()
+        val date: String = binding.editTextDate!!.getText().toString()
+        val feel: String = feelingText.toString()
+        val tit: String = binding.editTextTitle!!.getText().toString()
+        val sen: String = binding.editTextSentence!!.getText().toString()
         val data: MutableMap<String, Any> = HashMap()
         data["date"] = date
+        data["feeling"] = feel
         data["title"] = tit
         data["sentence"] = sen
         diary!!.add(data)
-            .addOnSuccessListener(OnSuccessListener<DocumentReference?> {
+            .addOnSuccessListener{
                 Toast.makeText(
                     context, "日記を更新しました!",
                     Toast.LENGTH_SHORT
                 ).show()
-
-            })
-            .addOnFailureListener(OnFailureListener {
+            }
+            .addOnFailureListener{
                 Toast.makeText(
                     context, "更新できませんでした。",
                     Toast.LENGTH_SHORT
                 ).show()
-            })
+            }
     }
 
     override fun onDestroyView() {

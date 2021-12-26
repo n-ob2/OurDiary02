@@ -18,7 +18,6 @@
         android:ems="10"
         android:focusable="true"
         android:hint="yyyy/mm/dd"
-        android:onClick="showDateDialog"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextSentence" />
 
     <RadioGroup
-        android:id="@+id/radioGroupeWether"
+        android:id="@+id/radioGroupeWeather"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -113,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleWether">
+        app:layout_constraintTop_toBottomOf="@+id/textTitleWeather">
 
         <RadioButton
             android:id="@+id/radioButtonSunny"
@@ -176,7 +175,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupeWether" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupeWeather" />
 
     <EditText
         android:id="@+id/editTextSentence"
@@ -209,7 +208,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
     <TextView
-        android:id="@+id/textTitleWether"
+        android:id="@+id/textTitleWeather"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
