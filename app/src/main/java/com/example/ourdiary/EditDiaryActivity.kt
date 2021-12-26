@@ -14,11 +14,8 @@ class EditDiaryActivity : AppCompatActivity() {
         binding = ActivityEditDiaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        editDiary = EditDiaryFragment()
-        supportFragmentManager.beginTransaction().apply{
-            replace(R.id.fragmentEditDiaryContainer, editDiary)
-            commit()
-        }
+        binding.pager.adapter = TabAdapter(supportFragmentManager,this)
+        binding.tabLayout.setupWithViewPager(binding.pager)
 
     }   //onCreate↑↑
 
