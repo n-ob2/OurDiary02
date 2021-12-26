@@ -50,14 +50,10 @@ class EditDiaryFragment : Fragment() {
         }
 
          */
-
-        binding.buttonConf.setOnClickListener{ doConfirm(it) }
-
         /*
         dateText = findViewById(R.id.editTextDate)
         titleText = findViewById(R.id.editTextTitle)
         sentenceText = findViewById(R.id.editTextSentence)
-
          */
 
         db = FirebaseFirestore.getInstance()
@@ -81,7 +77,11 @@ class EditDiaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_diary, container, false)
+        _binding = FragmentEditDiaryBinding.inflate(inflater, container, false)
+        binding.buttonConf.setOnClickListener { doConfirm(it)}
+
+        return binding.root
+        //return inflater.inflate(R.layout.fragment_edit_diary, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
