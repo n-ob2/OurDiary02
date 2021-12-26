@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ourdiary">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OurDiary">
-        <activity android:name=".TabActivity"></activity>
         <activity android:name=".EditDiaryActivity" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".CalendarActivity" />
@@ -24,5 +26,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>
