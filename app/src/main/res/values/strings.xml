@@ -15,4 +15,6 @@
     <string name="textGoToCalendar"><u>カレンダーへ</u></string>
     <string name="textPrev">&lt;&lt; <u>mm/dd</u></string>
     <string name="textNext"><u>mm/dd</u> &gt;&gt;</string>
+    <string name="textTitleFeelimgs">━ 今日の気分は？ ━</string>
+    <string name="textTitleWether">━ 天気は？ ━</string>
 </resources>
