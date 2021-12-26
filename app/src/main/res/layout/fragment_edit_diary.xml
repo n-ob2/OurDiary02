@@ -117,8 +117,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonSunny"
-            android:layout_width="20dp"
-            android:layout_height="17.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/segmented_sunny"
@@ -126,8 +126,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonCloudy"
-            android:layout_width="20dp"
-            android:layout_height="17.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/segmented_cloudy"
@@ -135,8 +135,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonRainy"
-            android:layout_width="20dp"
-            android:layout_height="17.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/segmented_rainy"
@@ -144,8 +144,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonSnow"
-            android:layout_width="20dp"
-            android:layout_height="17.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/segmented_snow"
@@ -153,8 +153,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonThunder"
-            android:layout_width="20dp"
-            android:layout_height="17.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/segmented_thunder"
