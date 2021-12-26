@@ -11,6 +11,8 @@ import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import kotlin.collections.HashMap
+import java.util.*
 
 /*
 private var DATE_RES_ID = "DATE_RES_ID"
