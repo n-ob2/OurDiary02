@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,6 @@ import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import kotlin.collections.HashMap
-import java.util.*
 
 /*
 private var DATE_RES_ID = "DATE_RES_ID"
@@ -119,6 +118,8 @@ class EditDiaryFragment : Fragment() {
                     context, "日記を更新しました!",
                     Toast.LENGTH_SHORT
                 ).show()
+                val intent = Intent(activity, CalendarActivity::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener{
                 Toast.makeText(

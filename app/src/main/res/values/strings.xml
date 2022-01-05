@@ -18,4 +18,5 @@
     <string name="textTitleFeelimgs">━ 今日の気分は？ ━</string>
     <string name="textTitleWether">━ 天気は？ ━</string>
     <string name="textTitleGacha">━ テーマは何にする？ ━</string>
+    <string name="buttonGacha">🔄 しつもんを変える 🔄</string>
 </resources>
