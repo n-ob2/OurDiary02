@@ -19,4 +19,5 @@
     <string name="textTitleWether">━ 天気は？ ━</string>
     <string name="textTitleGacha">━ テーマは何にする？ ━</string>
     <string name="buttonGacha">🔄 しつもんを変える 🔄</string>
+    <string name="buttonGachaRegistration">とうろくする</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentGachaDiaryBinding
@@ -16,7 +15,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import kotlin.random.Random
 
 class GachaDiaryFragment : Fragment() {
     private var _binding: FragmentGachaDiaryBinding?= null
@@ -27,10 +25,28 @@ class GachaDiaryFragment : Fragment() {
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
 
-    private var textGacha01: TextView? =null
+    private var textGacha01: EditText? =null
 
     private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
+
+    //ガチャの質問リスト
+    val list : Array<String> = arrayOf(
+        "いちばんたのしかったことは？",
+        "どんなお手伝い（おてつだい）をした？",
+        "お昼ごはんは何を食べた？",
+        "今日ならった漢字は？",
+        "なんのテレビを見た？",
+        "おそうじ当番（とうばん）はどこのばしょ？",
+        "休みじかんはどんなことをしたの？",
+        "今だいすきなことは何？",
+        "さんすうでならったことを教えて！",
+        "どんなおやつたべたの？",
+        "明日（あした）は何してあそびたい？",
+        "今日はじめて知ったこと！"
+    )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,22 +66,6 @@ class GachaDiaryFragment : Fragment() {
             dataText?.setText(result)
         }
 
-        //ガチャの質問リスト
-        val List : Array<String> = arrayOf(
-            "いちばんたのしかったことは？",
-            "どんなお手伝い（おてつだい）をした？",
-            "お昼ごはんは何を食べた？",
-            "今日ならった漢字は？",
-            "なんのテレビを見た？",
-            "おそうじ当番（とうばん）はどこのばしょ？",
-            "休みじかんはどんなことをしたの？",
-            "今だいすきなことは何？",
-            "さんすうでならったことを教えて！",
-            "どんなおやつたべたの？",
-            "明日（あした）は何してあそびたい？",
-            "今日はじめて知ったこと！"
-        )
-
     }   //onCreate↑↑
 
 
@@ -76,10 +76,19 @@ class GachaDiaryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentGachaDiaryBinding.inflate(inflater, container, false)
-        binding.buttonConf.setOnClickListener { doConfirm(it)}
+        binding.buttonGachaRegistration.setOnClickListener { doConfirm(it)}
+        binding.buttonGacha.setOnClickListener { doGacha(it) }
+
+
+
+        var range = (0..list.size)
+        var result = range.random()
+        var resultTitle = list[result]
+        binding.textGacha01.setText(resultTitle)
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_gacha_diary, container, false)
+
     }
 
     fun showDateDialog(view:View){
@@ -113,6 +122,14 @@ class GachaDiaryFragment : Fragment() {
             })
     }
 
+    private fun doGacha(view: View?){
+        var range = (0..list.size)
+        var result = range.random()
+        var resultTitle = list[result]
+        binding.textGacha01.setText(resultTitle)
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -120,38 +137,5 @@ class GachaDiaryFragment : Fragment() {
 
     companion object {
 
-    }
-
-    /**
-     * リストから指定された数の要素をランダムに重複なく取り出す。
-     *
-     * @receiver     このリストから要素を取り出す。
-     * @param n      取り出す要素の数。
-     * @param random 使用する乱数生成器。
-     * @param <T>    要素の型。
-     * @return 取得された要素を持つリスト。
-     */
-
-    fun <String> Collection<kotlin.String>.takeAtRandom(n: Int, random: Random = Random): List<kotlin.String> {
-        require(n <= size) { "引数 n の値 $n がレシーバーのサイズ ${size} より大きいです。" }
-
-        val taken = mutableListOf<kotlin.String>() // ランダムに選択された要素を持たせるリスト
-
-        val remaining = toMutableList() // 残っている要素のリスト
-        // 3 回繰り返す。
-        repeat(n) {
-            val remainingCount = remaining.size // 残っている要素の数
-            val index = random.nextInt(remainingCount) // ランダムに選択されたインデックス
-
-            taken += remaining[index] // ランダムに選択された要素
-
-            val lastIndex = remainingCount - 1 // 残っている要素のリストの末尾のインデックス
-            val lastElement = remaining.removeAt(lastIndex) // 残っている要素のリストから末尾を削除する。
-            if (index < lastIndex) { // ランダムに選択された要素が末尾以外なら…
-                remaining[index] = lastElement // それを末尾の要素で置換する。
-            }
-        }
-
-        return taken
     }
 }
