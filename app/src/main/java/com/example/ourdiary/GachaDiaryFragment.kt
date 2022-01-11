@@ -21,6 +21,8 @@ class GachaDiaryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var dateText: EditText? = null
+    private var feelingText: String? = null
+    private var weatherText: String? = null
     private var textGacha: EditText? = null
     private var editTextAnswer: EditText? = null
     private var dataText: EditText? = null
@@ -75,7 +77,8 @@ class GachaDiaryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentGachaDiaryBinding.inflate(inflater, container, false)
-        binding.buttonGachaRegistration.setOnClickListener { doConfirm(it)}
+        binding.buttonGachaRegistration.setOnClickListener { doRegi(it)}
+        binding.editTextDate.setOnClickListener { showDateDialog(it) }
         binding.buttonGacha.setOnClickListener { doGacha(it) }
 
 
@@ -89,18 +92,53 @@ class GachaDiaryFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_gacha_diary, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //各気分のラジオボタンが選ばれた時に変数feelingTextに値を代入
+        binding.radioGroupFeelings.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonHappy ->  feelingText = "happy"
+                R.id.radioButtonSmile -> feelingText = "smile"
+                R.id.radioButtonSoso -> feelingText = "soso"
+                R.id.radioButtonAngry -> feelingText = "angry"
+                else -> feelingText = "sad"
+            }
+        }
+        //各天気のラジオボタンが選ばれた時に変数weatherTextに値を代入
+        binding.radioGroupeWether.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonSunny ->  weatherText = "sunny"
+                R.id.radioButtonCloudy -> weatherText = "cloudy"
+                R.id.radioButtonRainy -> weatherText = "rainy"
+                R.id.radioButtonSnow -> weatherText = "snow"
+                else -> weatherText = "thunder"
+            }
+        }
+        /*
+        binding.editTextDate.setOnClickListener {
+            DateDialog { date ->
+                binding.editTextDate.setText(date)
+            }.show(parentFragmentManager,"date_dialog")
+        }*/
+    }
+
     fun showDateDialog(view:View){
         DateDialog{ date ->
             binding.editTextDate.setText(date)
         } .show( parentFragmentManager, "date_dialog")
     }
 
-    private fun doConfirm(view: View?) {
-        val date: String = dateText!!.getText().toString()
-        val tit: String = textGacha!!.getText().toString()
-        val sen: String = editTextAnswer!!.getText().toString()
+    private fun doRegi(view: View?) {
+        val date: String = binding.editTextDate!!.getText().toString()
+        val feel: String = feelingText.toString()
+        val weather: String = weatherText.toString()
+        val tit: String = binding.textGacha!!.getText().toString()
+        val sen: String = binding.editTextAnswer!!.getText().toString()
         val data: MutableMap<String, Any> = HashMap()
         data["date"] = date
+        data["feeling"] = feel
+        data["weather"] = weather
         data["title"] = tit
         data["sentence"] = sen
         diary!!.add(data)

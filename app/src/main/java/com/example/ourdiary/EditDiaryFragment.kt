@@ -76,6 +76,7 @@ class EditDiaryFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditDiaryBinding.inflate(inflater, container, false)
         binding.buttonConf.setOnClickListener { doConfirm(it) }
+        binding.editTextDate.setOnClickListener { showDateDialog(it) }
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_edit_diary, container, false)
@@ -101,23 +102,23 @@ class EditDiaryFragment : Fragment() {
                 R.id.radioButtonCloudy -> weatherText = "cloudy"
                 R.id.radioButtonRainy -> weatherText = "rainy"
                 R.id.radioButtonSnow -> weatherText = "snow"
-                else -> feelingText = "thunder"
+                else -> weatherText = "thunder"
             }
         }
 
+        /*
         binding.editTextDate.setOnClickListener {
             DateDialog { date ->
                 binding.editTextDate.setText(date)
             }.show(parentFragmentManager,"date_dialog")
-        }
+        }*/
     }
 
-    /*
     fun showDateDialog( view:View ) {
         DateDialog { date ->
             binding.editTextDate.setText(date)
         }.show(parentFragmentManager, "date_dialog")
-    }*/
+    }
 
     private fun doConfirm(view: View?) {
         val date: String = binding.editTextDate!!.getText().toString()

@@ -31,6 +31,7 @@
                 android:ems="10"
                 android:focusable="true"
                 android:hint="日付（ひづけ）"
+                android:onClick="showDateDialog"
                 android:textAlignment="center" />
 
             <TextView
