@@ -7,218 +7,218 @@
     android:layout_height="match_parent"
     tools:context=".EditDiaryFragment">
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="true"
-        android:ems="10"
-        android:focusable="true"
-        android:hint="yyyy/mm/dd"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupFeelings"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:checkedButton="@id/radioButtonSoso"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleFeelimgs">
-
-        <RadioButton
-            android:id="@+id/radioButtonHappy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_happy"
-            android:button="@null" />
-
-        <RadioButton
-            android:id="@+id/radioButtonSmile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_smile"
-            android:button="@null" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonSoso"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_soso"
-            android:button="@null" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonAngry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_angry"
-            android:button="@null" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonSad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_sad"
-            android:button="@null" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/buttonConf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="doConfirm"
-        android:text="とうろくする"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSentence" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupeWeather"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:checkedButton="@+id/radioButtonSunny"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleWeather">
-
-        <RadioButton
-            android:id="@+id/radioButtonSunny"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_sunny"
-            android:button="@null" />
-
-        <RadioButton
-            android:id="@+id/radioButtonCloudy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_cloudy"
-            android:button="@null" />
-
-        <RadioButton
-            android:id="@+id/radioButtonRainy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_rainy"
-            android:button="@null" />
-
-        <RadioButton
-            android:id="@+id/radioButtonSnow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_snow"
-            android:button="@null" />
-
-        <RadioButton
-            android:id="@+id/radioButtonThunder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/segmented_thunder"
-            android:button="@null" />
-
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/editTextTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Title"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupeWeather" />
-
-    <EditText
-        android:id="@+id/editTextSentence"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
-
-    <TextView
-        android:id="@+id/textTitleFeelimgs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/textTitleFeelimgs"
-        android:textAlignment="center"
-        android:textSize="16sp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textTitleWeather"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/textTitleWether"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupFeelings" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="true"
+                android:hint="日付（ひづけ）"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textTitleFeelimgs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/textTitleFeelimgs"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupFeelings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:checkedButton="@id/radioButtonSoso"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonHappy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_happy"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSmile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_smile"
+                    android:button="@null" />
+
+
+                <RadioButton
+                    android:id="@+id/radioButtonSoso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_soso"
+                    android:button="@null" />
+
+
+                <RadioButton
+                    android:id="@+id/radioButtonAngry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_angry"
+                    android:button="@null" />
+
+
+                <RadioButton
+                    android:id="@+id/radioButtonSad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_sad"
+                    android:button="@null" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textTitleWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/textTitleWether"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupeWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:checkedButton="@+id/radioButtonSunny"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonSunny"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_sunny"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonCloudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_cloudy"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonRainy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_rainy"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSnow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_snow"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonThunder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/segmented_thunder"
+                    android:button="@null" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textTitleblog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/textTitleBlog"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:ems="10"
+                android:hint="日記の題名（だいめい）"
+                android:inputType="textPersonName"
+                android:textAlignment="viewStart" />
+
+            <EditText
+                android:id="@+id/editTextSentence"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="日記の内容（ないよう）"
+                android:inputType="textMultiLine"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/buttonConf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:onClick="doConfirm"
+                android:text="とうろくする"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ class EditDiaryFragment : Fragment() {
 
     private var dateText: EditText? = null
     private var feelingText: String? = null
+    private var weatherText: String? = null
     private var titleText: EditText? = null
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
@@ -93,23 +94,41 @@ class EditDiaryFragment : Fragment() {
                 else -> feelingText = "sad"
             }
         }
+        //各天気のラジオボタンが選ばれた時に変数weatherTextに値を代入
+        binding.radioGroupeWeather.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonSunny ->  weatherText = "sunny"
+                R.id.radioButtonCloudy -> weatherText = "cloudy"
+                R.id.radioButtonRainy -> weatherText = "rainy"
+                R.id.radioButtonSnow -> weatherText = "snow"
+                else -> feelingText = "thunder"
+            }
+        }
+
+        binding.editTextDate.setOnClickListener {
+            DateDialog { date ->
+                binding.editTextDate.setText(date)
+            }.show(parentFragmentManager,"date_dialog")
+        }
     }
 
-
+    /*
     fun showDateDialog( view:View ) {
         DateDialog { date ->
             binding.editTextDate.setText(date)
         }.show(parentFragmentManager, "date_dialog")
-    }
+    }*/
 
     private fun doConfirm(view: View?) {
         val date: String = binding.editTextDate!!.getText().toString()
         val feel: String = feelingText.toString()
+        val weather: String = weatherText.toString()
         val tit: String = binding.editTextTitle!!.getText().toString()
         val sen: String = binding.editTextSentence!!.getText().toString()
         val data: MutableMap<String, Any> = HashMap()
         data["date"] = date
         data["feeling"] = feel
+        data["weather"] = weather
         data["title"] = tit
         data["sentence"] = sen
         diary!!.add(data)

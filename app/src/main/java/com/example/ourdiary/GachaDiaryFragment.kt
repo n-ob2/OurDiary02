@@ -21,11 +21,9 @@ class GachaDiaryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var dateText: EditText? = null
-    private var titleText: EditText? = null
-    private var sentenceText: EditText? = null
+    private var textGacha: EditText? = null
+    private var editTextAnswer: EditText? = null
     private var dataText: EditText? = null
-
-    private var textGacha01: EditText? =null
 
     private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
@@ -35,7 +33,7 @@ class GachaDiaryFragment : Fragment() {
         "いちばんたのしかったことは？",
         "どんなお手伝い（おてつだい）をした？",
         "お昼ごはんは何を食べた？",
-        "今日ならった漢字は？",
+        "今日ならった漢字は？むずかしかった？",
         "なんのテレビを見た？",
         "おそうじ当番（とうばん）はどこのばしょ？",
         "休みじかんはどんなことをしたの？",
@@ -43,7 +41,8 @@ class GachaDiaryFragment : Fragment() {
         "さんすうでならったことを教えて！",
         "どんなおやつたべたの？",
         "明日（あした）は何してあそびたい？",
-        "今日はじめて知ったこと！"
+        "今日はじめて知ったこと！",
+        "なにがかりをしてるの？どんな仕事（しごと）があるのかな？"
     )
 
 
@@ -80,15 +79,14 @@ class GachaDiaryFragment : Fragment() {
         binding.buttonGacha.setOnClickListener { doGacha(it) }
 
 
-
+        //タイトルガチャ
         var range = (0..list.size)
         var result = range.random()
         var resultTitle = list[result]
-        binding.textGacha01.setText(resultTitle)
+        binding.textGacha.setText(resultTitle)
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_gacha_diary, container, false)
-
     }
 
     fun showDateDialog(view:View){
@@ -99,8 +97,8 @@ class GachaDiaryFragment : Fragment() {
 
     private fun doConfirm(view: View?) {
         val date: String = dateText!!.getText().toString()
-        val tit: String = titleText!!.getText().toString()
-        val sen: String = sentenceText!!.getText().toString()
+        val tit: String = textGacha!!.getText().toString()
+        val sen: String = editTextAnswer!!.getText().toString()
         val data: MutableMap<String, Any> = HashMap()
         data["date"] = date
         data["title"] = tit
@@ -126,8 +124,7 @@ class GachaDiaryFragment : Fragment() {
         var range = (0..list.size)
         var result = range.random()
         var resultTitle = list[result]
-        binding.textGacha01.setText(resultTitle)
-
+        binding.textGacha.setText(resultTitle)
     }
 
     override fun onDestroyView() {

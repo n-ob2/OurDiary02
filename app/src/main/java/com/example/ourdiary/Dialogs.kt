@@ -9,6 +9,7 @@ import java.util.*
 
 class DateDialog(private val onSelected: (String) -> Unit)
     : DialogFragment(), DatePickerDialog.OnDateSetListener{
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState)
 
@@ -22,5 +23,4 @@ class DateDialog(private val onSelected: (String) -> Unit)
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         onSelected("$year/${month + 1}/$dayOfMonth")
     }
-
 }
