@@ -2,12 +2,21 @@ package com.example.ourdiary
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourdiary.databinding.ActivityCalendarBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+
 
 class CalendarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalendarBinding
-    private lateinit var calendar: CalenderFragment
+
+    private var db: FirebaseFirestore? = null
+    private var diary: CollectionReference? = null
+    private var dataText: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,17 +25,32 @@ class CalendarActivity : AppCompatActivity() {
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        calendar = CalenderFragment()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentContainerView2, calendar)
-            commit()
-        }
-
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, EditDiaryActivity::class.java)
             startActivity(intent)
         }
-    }
+
+        db = FirebaseFirestore.getInstance()
+        diary = db!!.collection("diary")
+
+        diary!!.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+            if (task.isSuccessful) {
+                var result = ""
+                for (document in task.result!!) {
+                    val data = document.data
+                    result += (data["date"].toString() + " ["
+                            + data["feeling"].toString() + ":"
+                            + data["sentence"].toString() + ":"
+                            + data["title"].toString() + ":"
+                            + data["weather"].toString() + "]\n")
+                }
+                binding.dataText?.setText(result)
+
+            } else {
+                //データ取得に失敗した時の処理
+            }
+        })
+    }   //onCreate ↑↑
 
 
 }

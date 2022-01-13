@@ -11,7 +11,6 @@ class DateDialog(private val onSelected: (String) -> Unit)
     : DialogFragment(), DatePickerDialog.OnDateSetListener{
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState)
 
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
