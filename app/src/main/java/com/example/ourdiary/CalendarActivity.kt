@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ourdiary.databinding.ActivityCalendarBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.CollectionReference
@@ -30,6 +31,8 @@ class CalendarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
@@ -40,17 +43,19 @@ class CalendarActivity : AppCompatActivity() {
                     val data = document.data
                     result += (data["date"].toString() + " ["
                             + data["feeling"].toString() + ":"
-                            + data["sentence"].toString() + ":"
-                            + data["title"].toString() + ":"
-                            + data["weather"].toString() + "]\n")
+                            + data["title"].toString() + "]\n")
                 }
-                binding.dataText?.setText(result)
+                //binding.dataText?.setText(result) テキストとして出力成功
+
+                binding.recyclerView.layoutManager = LinearLayoutManager(baseContext)
+                val adapter = com.example.ourdiary.DiaryAdapter(diary)
+                binding.recyclerView.adapter = adapter
 
             } else {
                 //データ取得に失敗した時の処理
             }
         })
-    }   //onCreate ↑↑
 
+    }   //onCreate ↑↑
 
 }
