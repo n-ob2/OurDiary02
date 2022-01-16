@@ -5,31 +5,40 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.google.firebase.firestore.CollectionReference
 
-class DiaryAdapter internal constructor(options: CollectionReference?):
-    FirestoreRecyclerAdapter<Diary, DiaryViewHolder>(data, true){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
+class DiaryAdapter(private val diarylist: ArrayList<Diary>): RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_diary_item,parent, false)
-        return DiaryViewHolder(view)
+    //viewの初期化
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
+        val date: TextView
+        val feeling: TextView
+        val title: TextView
+
+        init {
+            date = view.findViewById(R.id.text_item_date)
+            feeling = view.findViewById(R.id.text_item_feeling)
+            title = view.findViewById(R.id.text_item_title)
+
+        }
     }
 
-    override fun onBindViewHolder(holder: DiaryViewHolder, position: Int, model: Diary) {
-        holder.setDiaryItem(model.title!!, model.date!!)
+    //レイアウトの設定
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout_diary_item, viewGroup, false)
+        return ViewHolder(view)
     }
-}
 
-class DiaryViewHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view){
-    internal fun setDiaryItem(title: String, date: String) {
+    //viewの設定
+    override fun onBindViewHolder(viewholder: ViewHolder, position: Int) {
+        val diary = diarylist[position]
 
-        val textviewFirst = view.findViewById<TextView>(R.id.text_item_title)
-        textviewFirst.text = title
-
-        val textviewLast = view.findViewById<TextView>(R.id.text_item_date)
-        textviewLast.text = date
+        viewholder.date.text = diary.date
+        viewholder.feeling.text = diary.feeling
+        viewholder.title.text = diary.title
     }
+
+    override fun getItemCount() = diarylist.size
+
 }
 
 

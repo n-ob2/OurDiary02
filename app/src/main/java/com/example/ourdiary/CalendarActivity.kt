@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ourdiary.databinding.ActivityCalendarBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.CollectionReference
@@ -19,6 +20,8 @@ class CalendarActivity : AppCompatActivity() {
     private var diary: CollectionReference? = null
     private var dataText: EditText? = null
 
+    lateinit var mAdapter: DiaryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
@@ -31,31 +34,32 @@ class CalendarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
         diary!!.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
-                var result = ""
+                var result = mutableListOf<Diary>()
                 for (document in task.result!!) {
                     val data = document.data
-                    result += (data["date"].toString() + " ["
-                            + data["feeling"].toString() + ":"
-                            + data["title"].toString() + "]\n")
+                    result.add(data.values)
                 }
-                //binding.dataText?.setText(result) テキストとして出力成功
 
-                binding.recyclerView.layoutManager = LinearLayoutManager(baseContext)
-                val adapter = com.example.ourdiary.DiaryAdapter(diary)
-                binding.recyclerView.adapter = adapter
+                //binding.dataText?.setText(result) //テキストとして出力成功
 
+                val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+                recyclerView.layoutManager = LinearLayoutManager(this)
+                mAdapter  = DiaryAdapter(result)
+                recyclerView.adapter = mAdapter
             } else {
                 //データ取得に失敗した時の処理
             }
         })
 
     }   //onCreate ↑↑
+
+    private fun createDatalist() {
+        val dataList = mutableListOf<Diary>()
+    }
 
 }
