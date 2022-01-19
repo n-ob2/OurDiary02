@@ -10,16 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 class DiaryAdapter(private val diarylist: MutableList<Diary>):
     RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
 
-    init{
-        setHasStableIds(true)
+    //リスナーを格納する変数
+    private lateinit var listener: OnDiaryCellClickListener
+
+    //インターフェース作成
+    interface  OnDiaryCellClickListener {
+        fun onItemClick(diary: Diary)
     }
 
-    //セルをタップできるようにする処理
-    /*
-    private var listener: ((Long?) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Long?) -> Unit){
+    // リスナーをセット
+    fun setOnDiaryCellClickListener(listener: OnDiaryCellClickListener) {
+        // 定義した変数listenerに実行したい処理を引数で渡す（BookListFragmentで渡している）
         this.listener = listener
-    }*/
+    }
 
     //viewの初期化
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -48,10 +51,12 @@ class DiaryAdapter(private val diarylist: MutableList<Diary>):
         viewholder.date.text = diary.date
         viewholder.feeling.text = diary.feeling
         viewholder.title.text = diary.title
-        /*
+
+        // 4. セルのクリックイベントにリスナをセット
         viewholder.itemView.setOnClickListener {
-            listener?.invoke(dairy?.id)
-        }*/
+            // セルがクリックされた時にインターフェースの処理が実行される
+            listener.onItemClick(diary)
+        }
     }
 
     override fun getItemCount() = diarylist.size

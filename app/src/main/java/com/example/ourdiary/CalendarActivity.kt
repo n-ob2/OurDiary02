@@ -56,6 +56,18 @@ class CalendarActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
                 mAdapter  = DiaryAdapter(result)
                 recyclerView.adapter = mAdapter
+
+                mAdapter.setOnDiaryCellClickListener(object : DiaryAdapter.OnDiaryCellClickListener{
+                    override fun onItemClick(diary: Diary) {
+                        // 書籍データを渡す処理(クリックしたときに何をしたいか)
+                        // 次のアクティビティに"diary"の中身のデータを渡す処理。※独自のclassなので簡単に渡せない
+                        val intent = Intent(this, DiaryActivity::class.java)
+                        intent.putExtra(DiaryActivity.KEY_STATE, diary)
+                        startActivity(intent)
+
+                }) {
+                    
+                })
             } else {
                 //データ取得に失敗した時の処理
             }
