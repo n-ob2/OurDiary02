@@ -37,12 +37,17 @@ class CalendarActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
+
         diary!!.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
                 var result = mutableListOf<Diary>()
                 for (document in task.result!!) {
+                    var diary2 = Diary()
                     val data = document.data
-                    result.add(data.values)
+                    diary2.date = data["date"].toString()
+                    diary2.feeling = data["feeling"].toString()
+                    diary2.title = data["title"].toString()
+                    result.add(diary2)
                 }
 
                 //binding.dataText?.setText(result) //テキストとして出力成功

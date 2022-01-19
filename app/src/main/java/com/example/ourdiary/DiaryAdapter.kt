@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DiaryAdapter(private val diarylist: ArrayList<Diary>): RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
+class DiaryAdapter(private val diarylist: MutableList<Diary>): RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
 
     //viewの初期化
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){

@@ -83,7 +83,7 @@ class GachaDiaryFragment : Fragment() {
 
 
         //タイトルガチャ
-        var range = (0..list.size)
+        var range = (list.indices)
         var result = range.random()
         var resultTitle = list[result]
         binding.textGacha.setText(resultTitle)
