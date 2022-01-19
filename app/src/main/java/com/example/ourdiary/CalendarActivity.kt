@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+//import android.content.Intent
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
@@ -11,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.gson.Gson
 
 
 class CalendarActivity : AppCompatActivity() {
@@ -61,13 +63,12 @@ class CalendarActivity : AppCompatActivity() {
                     override fun onItemClick(diary: Diary) {
                         // 書籍データを渡す処理(クリックしたときに何をしたいか)
                         // 次のアクティビティに"diary"の中身のデータを渡す処理。※独自のclassなので簡単に渡せない
-                        val intent = Intent(this, DiaryActivity::class.java)
-                        intent.putExtra(DiaryActivity.KEY_STATE, diary)
+                        val intent = Intent(this@CalendarActivity, DiaryActivity::class.java)
+                        // Gsonで Object → String
+                        intent.putExtra(DiaryActivity.KEY_STATE, Gson().toJson(diary))
                         startActivity(intent)
 
-                }) {
-                    
-                })
+                        }})
             } else {
                 //データ取得に失敗した時の処理
             }
