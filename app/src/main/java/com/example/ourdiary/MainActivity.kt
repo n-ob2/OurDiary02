@@ -27,13 +27,14 @@ class MainActivity : AppCompatActivity() {
         val buttonSignUp = findViewById<Button>(R.id.btnSignUp)
         val buttonLogin = findViewById<Button>(R.id.btnLogin)
 
-        val emailEditText = findViewById<EditText>(R.id.editEmail)
-        val emailText = emailEditText.text.toString()
-        val passEditText = findViewById<EditText>(R.id.editPassword)
-        val passText = passEditText.text.toString()
+
 
         buttonSignUp.setOnClickListener {   //新規登録
-            auth.createUserWithEmailAndPassword(emailText, passText)
+
+            var emailEditText = binding.editEmail.text.toString()
+            var passEditText = binding.editPassword.text.toString()
+
+            auth.createUserWithEmailAndPassword(emailEditText, passEditText)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(
@@ -50,7 +51,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonLogin.setOnClickListener {    //ログイン
-            /*
+
+            var emailEditText = findViewById<EditText>(R.id.editEmail)
+            var emailText = emailEditText.text.toString()
+
+            var passEditText = findViewById<EditText>(R.id.editPassword)
+            var passText = passEditText.text.toString()
+
             auth.signInWithEmailAndPassword(emailText, passText)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -65,9 +72,8 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-             */
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, CalendarActivity::class.java)
+            //startActivity(intent)
         }
 
     }   //onCreate ↑↑

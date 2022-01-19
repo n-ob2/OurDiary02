@@ -6,7 +6,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DiaryAdapter(private val diarylist: MutableList<Diary>): RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
+
+class DiaryAdapter(private val diarylist: MutableList<Diary>):
+    RecyclerView.Adapter<DiaryAdapter.ViewHolder>() {
+
+    init{
+        setHasStableIds(true)
+    }
+
+    //セルをタップできるようにする処理
+    /*
+    private var listener: ((Long?) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Long?) -> Unit){
+        this.listener = listener
+    }*/
 
     //viewの初期化
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -35,9 +48,18 @@ class DiaryAdapter(private val diarylist: MutableList<Diary>): RecyclerView.Adap
         viewholder.date.text = diary.date
         viewholder.feeling.text = diary.feeling
         viewholder.title.text = diary.title
+        /*
+        viewholder.itemView.setOnClickListener {
+            listener?.invoke(dairy?.id)
+        }*/
     }
 
     override fun getItemCount() = diarylist.size
+
+    /*
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)?.id ?:0
+    }*/
 
 }
 
