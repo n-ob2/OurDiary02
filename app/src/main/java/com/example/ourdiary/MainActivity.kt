@@ -32,11 +32,17 @@ class MainActivity : AppCompatActivity() {
             var emailEditText = binding.editEmail.text.toString() + ""
             var passEditText = binding.editPassword.text.toString() + ""
 
+            var length: Int = passEditText.length
+
             auth.createUserWithEmailAndPassword(emailEditText, passEditText)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                             Log.d("DEBUG", "createUserWithEmail:success")
                             val user = auth.currentUser
+                    }; if ( length < 6 ) {
+                        Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "パスワードは6文字以上です。。", Toast.LENGTH_LONG).show()
+
                     } else {
                         Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
                         Toast.makeText(baseContext, "登録に失敗しました。", Toast.LENGTH_SHORT).show()
