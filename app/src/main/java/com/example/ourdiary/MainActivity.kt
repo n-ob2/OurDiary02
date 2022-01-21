@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(emailEditText, passEditText)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                            Log.d("DEBUG", "createUserWithEmail:success")
+                            Log.d("DEBUG", "登録できました。")
                             val user = auth.currentUser
                     }; if ( length < 6 ) {
                         Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
