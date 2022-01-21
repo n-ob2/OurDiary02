@@ -16,7 +16,7 @@ class DiaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ///setContentView(R.layout.activity_diary)
 
-        binding =  ActivityDiaryBinding.inflate(layoutInflater)
+        binding = ActivityDiaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val stateStr = intent.getStringExtra(KEY_STATE)
