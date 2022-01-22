@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OurDiary">
-        <activity android:name=".RewriteDiaryActivity"></activity>
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".RewriteDiaryActivity" />
         <activity android:name=".EditDiaryActivity" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".CalendarActivity" />

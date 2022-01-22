@@ -34,20 +34,27 @@ class MainActivity : AppCompatActivity() {
 
             var length: Int = passEditText.length
 
-            auth.createUserWithEmailAndPassword(emailEditText, passEditText)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                            Log.d("DEBUG", "登録できました。")
-                            val user = auth.currentUser
-                    }; if ( length < 6 ) {
-                        Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "パスワードは6文字以上です。。", Toast.LENGTH_LONG).show()
+            try {
+                auth.createUserWithEmailAndPassword(emailEditText, passEditText)
+                    .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                Log.d("DEBUG", "登録できました。")
+                                Toast.makeText(baseContext, "登録できました。", Toast.LENGTH_LONG).show()
+                                val intent = Intent(this, CalendarActivity::class.java)
+                                startActivity(intent)
+                            } else if ( length < 6 ) {
+                                Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
+                                Toast.makeText(baseContext, "パスワードは6文字以上です。。", Toast.LENGTH_LONG).show()
 
-                    } else {
-                        Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "登録に失敗しました。", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
+                                Toast.makeText(baseContext, "登録に失敗しました。", Toast.LENGTH_SHORT).show()
+                            }
                     }
-                }
+            } catch (e: Exception){
+                Toast.makeText(baseContext, "登録に失敗しました。", Toast.LENGTH_LONG).show()
+            }
+
         }
 
         buttonLogin.setOnClickListener {    //ログイン
@@ -61,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // ログイン成功
                         Toast.makeText(this@MainActivity, "ログインしました!!", Toast.LENGTH_SHORT).show()
-                        val user = auth.currentUser
+                        //val user = auth.currentUser
                         val intent = Intent(this, CalendarActivity::class.java)
                         startActivity(intent)
 //                    updateUI(user)

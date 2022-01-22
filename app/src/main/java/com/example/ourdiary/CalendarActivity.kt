@@ -3,6 +3,7 @@ package com.example.ourdiary
 //import android.content.Intent
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,7 @@ class CalendarActivity : AppCompatActivity() {
                 for (document in task.result!!) {
                     var diary2 = Diary()
                     val data = document.data
-                    //diary2.id =
+                    diary2.id = document.id
                     diary2.date = data["date"].toString()
                     diary2.feeling = data["feeling"].toString()
                     diary2.weather = data["weather"].toString()
@@ -81,6 +82,11 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun createDatalist() {
         val dataList = mutableListOf<Diary>()
+    }
+
+    fun gotoSetting(view: View?){
+        val intent = Intent(this, SettingActivity::class.java)
+        startActivity(intent)
     }
 
 }
