@@ -15,11 +15,12 @@
     <string name="textGoToCalendar"><u>カレンダーへ</u></string>
     <string name="textPrev">&lt;&lt; <u>mm/dd</u></string>
     <string name="textNext"><u>mm/dd</u> &gt;&gt;</string>
-    <string name="textTitleFeelimgs">━ 今日の気分は？ ━</string>
-    <string name="textTitleWether">━ 天気は？ ━</string>
+    <string name="textTitleFeelimgs">━ 気分をえらぶ ━</string>
+    <string name="textTitleWether">━ 天気をえらぶ ━</string>
     <string name="textTitleGacha">━ テーマは何にする？ ━</string>
     <string name="buttonGacha">🔄 テーマを変える 🔄</string>
     <string name="buttonGachaRegistration">とうろくする</string>
     <string name="textTitleBlog">━ じゆうに日記を書いてみよう！ ━</string>
     <string name="passAttention">パスワードは6文字以上で入力してください。</string>
+    <string name="btnCancel">キャンセル</string>
 </resources>
