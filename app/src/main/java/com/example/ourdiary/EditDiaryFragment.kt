@@ -135,8 +135,8 @@ class EditDiaryFragment : Fragment() {
         diary!!.add(data)
             .addOnSuccessListener{
                 Toast.makeText(
-                    context, "日記を更新しました!",
-                    Toast.LENGTH_SHORT
+                    context, "日記を作成しました!",
+                    Toast.LENGTH_LONG
                 ).show()
                 val intent = Intent(activity, CalendarActivity::class.java)
                 startActivity(intent)
@@ -144,7 +144,7 @@ class EditDiaryFragment : Fragment() {
             .addOnFailureListener{
                 Toast.makeText(
                     context, "更新できませんでした。",
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_LONG
                 ).show()
             }
     }

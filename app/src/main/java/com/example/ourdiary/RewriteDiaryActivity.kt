@@ -1,12 +1,34 @@
 package com.example.ourdiary
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourdiary.databinding.ActivityRewriteDiaryBinding
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+
 
 class RewriteDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRewriteDiaryBinding
+
+    private var dateText: EditText? = null
+    private var feelingText: String? = null
+    private var weatherText: String? = null
+    private var titleText: EditText? = null
+    private var sentenceText: EditText? = null
+    private var dataText: EditText? = null
+
+    private var db: FirebaseFirestore? = null
+    private var diaryDb: CollectionReference? = null
+    private var get_id: String? = null
+
 
     companion object {
         val KEY_STATE = "key_state"
@@ -27,29 +49,80 @@ class RewriteDiaryActivity : AppCompatActivity() {
         binding.rewriteTextDate.setText(diary.date)
         binding.rewriteTextTitle.setText(diary.title)
         binding.rewriteTextSentence.setText(diary.sentence)
-        
-        /*
-        //気分アイコンの中身をセット
-        binding.radioGroupFeelings.setOnCheckedChangeListener{ group, checkedId: Int ->
-            when (checkedId) {
-                R.id.radioButtonHappy ->  diary.feeling = "happy"
-                R.id.radioButtonSmile -> diary.feeling = "smile"
-                R.id.radioButtonSoso -> diary.feeling = "soso"
-                R.id.radioButtonAngry -> diary.feeling = "angry"
-                else -> diary.feeling = "sad"
+
+
+        //FirebaseApp.initializeApp(this)
+        val db = Firebase.firestore
+        diaryDb = db.collection("diary")
+
+        diaryDb!!.addSnapshotListener { snapshot, e ->
+            var result_id = ""
+            val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
+            while (items.hasNext()) {
+                val docdata = items.next()
+                val data = docdata.data
+                result_id = """${docdata.id}"""
+                binding.textId.setText(result_id)
             }
         }
-        //天気アイコンの中身をセット
-        binding.radioGroupeWeather.setOnCheckedChangeListener{ group, checkedId: Int ->
-            when (checkedId) {
-                R.id.radioButtonSunny ->  diary.weather = "sunny"
-                R.id.radioButtonCloudy -> diary.weather = "cloudy"
-                R.id.radioButtonRainy -> diary.weather = "rainy"
-                R.id.radioButtonSnow -> diary.weather = "snow"
-                else -> diary.weather = "thunder"
-            }
-        }*/
 
+        //各気分のラジオボタンが選ばれた時に変数feelingTextに値を代入
+        binding.radioGroupFeelings.setOnCheckedChangeListener { group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonHappy -> feelingText = "happy"
+                R.id.radioButtonSmile -> feelingText = "smile"
+                R.id.radioButtonSoso -> feelingText = "soso"
+                R.id.radioButtonAngry -> feelingText = "angry"
+                else -> feelingText = "sad"
+            }
+        }
+        //各天気のラジオボタンが選ばれた時に変数weatherTextに値を代入
+        binding.radioGroupeWeather.setOnCheckedChangeListener { group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonSunny -> weatherText = "sunny"
+                R.id.radioButtonCloudy -> weatherText = "cloudy"
+                R.id.radioButtonRainy -> weatherText = "rainy"
+                R.id.radioButtonSnow -> weatherText = "snow"
+                else -> weatherText = "thunder"
+            }
+        }
 
     }//onCreate ↑↑
+
+
+
+    fun doRewrite(view: View) {
+        get_id = binding.textId.getText().toString() + ""
+        diaryDb!!.document().get().addOnCompleteListener{}
+
+        val date: String = binding.rewriteTextDate!!.getText().toString()
+        val feel: String = feelingText.toString()
+        val weather: String = weatherText.toString()
+        val tit: String = binding.rewriteTextTitle!!.getText().toString()
+        val sen: String = binding.rewriteTextSentence!!.getText().toString()
+        val data: MutableMap<String, Any> = HashMap()
+        data["date"] = date
+        data["feeling"] = feel
+        data["weather"] = weather
+        data["title"] = tit
+        data["sentence"] = sen
+
+        diaryDb!!.document(get_id!!).set(data)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this, "日記を更新（こうしん）しました!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val intent = Intent(this, CalendarActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        this, "更新（こうしん）できませんでした。",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
 }
+

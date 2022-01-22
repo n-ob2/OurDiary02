@@ -46,9 +46,12 @@ class CalendarActivity : AppCompatActivity() {
                 for (document in task.result!!) {
                     var diary2 = Diary()
                     val data = document.data
+                    //diary2.id =
                     diary2.date = data["date"].toString()
                     diary2.feeling = data["feeling"].toString()
+                    diary2.weather = data["weather"].toString()
                     diary2.title = data["title"].toString()
+                    diary2.sentence = data["sentence"].toString()
                     result.add(diary2)
                 }
 
