@@ -9,6 +9,7 @@ import com.google.gson.Gson
 
 class DiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDiaryBinding
+    private lateinit var diary: Diary
 
     companion object {
         val KEY_STATE = "key_state"
@@ -23,7 +24,7 @@ class DiaryActivity : AppCompatActivity() {
 
         val stateStr = intent.getStringExtra(KEY_STATE)
         // Gsonで String → Object
-        val diary = Gson().fromJson<Diary>(stateStr, Diary::class.java)
+        diary = Gson().fromJson<Diary>(stateStr, Diary::class.java)
         //変数diaryの中に諸々の日記データが格納されているから、bindingで各ViewにsetTextすればよい。
 
         binding.textViewDate.setText(diary.date)
@@ -55,7 +56,27 @@ class DiaryActivity : AppCompatActivity() {
             // Gsonで Object → String
             intent.putExtra(DiaryActivity.KEY_STATE, Gson().toJson(diary))
             startActivity(intent)
-
         }
+
+        /*
+        binding.btnDelete.setOnClickListener {
+            document(get_id).delete()
+                .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this@MainActivity, "delete data!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            this@MainActivity, "can't delete..",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+        }
+        */
+
     }
+
 }

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        binding.textResetPass.setOnClickListener{ onTextResetPassTapped(it) }
+        //binding.textResetPass.setOnClickListener{ onTextResetPassTapped(it) }
 
         val buttonSignUp = findViewById<Button>(R.id.btnSignUp)
         val buttonLogin = findViewById<Button>(R.id.btnLogin)
@@ -62,22 +62,30 @@ class MainActivity : AppCompatActivity() {
             val email = binding.editEmail.text.toString() + ""
             val password: String = binding.editPassword.text.toString() + ""
 
-            Toast.makeText(this@MainActivity, "ログイン スタート", Toast.LENGTH_SHORT).show()
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // ログイン成功
-                        Toast.makeText(this@MainActivity, "ログインしました!!", Toast.LENGTH_SHORT).show()
-                        //val user = auth.currentUser
-                        val intent = Intent(this, CalendarActivity::class.java)
-                        startActivity(intent)
-//                    updateUI(user)
-                    } else {
-                        // ログイン失敗
-                        Toast.makeText(this@MainActivity, "ログインできませんでした。", Toast.LENGTH_SHORT).show()
-//                    updateUI(null)
+            //Toast.makeText(this@MainActivity, "ログイン スタート", Toast.LENGTH_SHORT).show()
+
+            try {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // ログイン成功
+                            Toast.makeText(this@MainActivity, "ログインしました!!", Toast.LENGTH_SHORT)
+                                .show()
+                            //val user = auth.currentUser
+                            val intent = Intent(this, CalendarActivity::class.java)
+                            startActivity(intent)
+                            //                    updateUI(user)
+                        } else {
+                            // ログイン失敗
+                            Toast.makeText(this@MainActivity, "ログインできませんでした。", Toast.LENGTH_SHORT)
+                                .show()
+                            //                    updateUI(null)
+                        }
                     }
-                }
+            }catch (e: Exception){
+                Toast.makeText(baseContext, "ログインできませんでした。", Toast.LENGTH_LONG).show()
+
+            }
 
         }
 

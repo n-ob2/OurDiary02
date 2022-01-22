@@ -75,19 +75,6 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textResetPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/textResetPass"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
-
-    <TextView
         android:id="@+id/textPassattention"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
