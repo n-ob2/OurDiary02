@@ -27,6 +27,29 @@ class RewriteDiaryActivity : AppCompatActivity() {
         binding.rewriteTextDate.setText(diary.date)
         binding.rewriteTextTitle.setText(diary.title)
         binding.rewriteTextSentence.setText(diary.sentence)
+        
+        /*
+        //気分アイコンの中身をセット
+        binding.radioGroupFeelings.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonHappy ->  diary.feeling = "happy"
+                R.id.radioButtonSmile -> diary.feeling = "smile"
+                R.id.radioButtonSoso -> diary.feeling = "soso"
+                R.id.radioButtonAngry -> diary.feeling = "angry"
+                else -> diary.feeling = "sad"
+            }
+        }
+        //天気アイコンの中身をセット
+        binding.radioGroupeWeather.setOnCheckedChangeListener{ group, checkedId: Int ->
+            when (checkedId) {
+                R.id.radioButtonSunny ->  diary.weather = "sunny"
+                R.id.radioButtonCloudy -> diary.weather = "cloudy"
+                R.id.radioButtonRainy -> diary.weather = "rainy"
+                R.id.radioButtonSnow -> diary.weather = "snow"
+                else -> diary.weather = "thunder"
+            }
+        }*/
+
 
     }//onCreate ↑↑
 }
