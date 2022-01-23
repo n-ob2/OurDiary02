@@ -58,26 +58,6 @@ class DiaryActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-        binding.btnDelete.setOnClickListener {
-            document(get_id).delete()
-                .addOnCompleteListener(OnCompleteListener<Void?> { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            this@MainActivity, "delete data!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            this@MainActivity, "can't delete..",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
-        }
-
-         */
-
     }
 
 }

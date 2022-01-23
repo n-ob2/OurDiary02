@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourdiary.databinding.ActivityRewriteDiaryBinding
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -77,6 +78,27 @@ class RewriteDiaryActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnDelete.setOnClickListener {
+            diaryDb!!.document(diary.id).delete()
+                .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText( this, "日記を削除（さくじょ）しました。",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this, CalendarActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "削除（さくじょ）できませんでした。",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+        }
+
+        binding.btnCancel.setOnClickListener{
+            finish()
+        }
+
     }//onCreate ↑↑
 
 
@@ -113,5 +135,6 @@ class RewriteDiaryActivity : AppCompatActivity() {
                 }
             }
         }
+
 }
 
