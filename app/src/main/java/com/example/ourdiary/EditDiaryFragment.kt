@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 
 /*
 private var DATE_RES_ID = "DATE_RES_ID"
@@ -56,6 +55,7 @@ class EditDiaryFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
+        /*
         diary!!.addSnapshotListener { snapshot, e ->
             var result = ""
             val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
@@ -67,6 +67,7 @@ class EditDiaryFragment : Fragment() {
             }
             dataText?.setText(result)
         }
+         */
     }   //onCreate↑↑
 
     override fun onCreateView(

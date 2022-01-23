@@ -75,7 +75,8 @@ class DiaryActivity : AppCompatActivity() {
                     }
                 })
         }
-        */
+
+         */
 
     }
 

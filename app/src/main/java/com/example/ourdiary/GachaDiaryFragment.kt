@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class GachaDiaryFragment : Fragment() {
     private var _binding: FragmentGachaDiaryBinding?= null
@@ -55,6 +54,7 @@ class GachaDiaryFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
+        /*
         diary!!.addSnapshotListener { snapshot, e ->
             var result = ""
             val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
@@ -66,6 +66,7 @@ class GachaDiaryFragment : Fragment() {
             }
             dataText?.setText(result)
         }
+         */
 
     }   //onCreate↑↑
 
