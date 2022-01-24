@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class GachaDiaryFragment : Fragment() {
     private var _binding: FragmentGachaDiaryBinding?= null
@@ -54,19 +55,19 @@ class GachaDiaryFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("diary")
 
-        /*
         diary!!.addSnapshotListener { snapshot, e ->
-            var result = ""
-            val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
-            while (items.hasNext()) {
-                val docdata = items.next()
-                val data = docdata.data
-                result += """${data["date"].toString()} ${data["title"].toString()} ${data["sentence"].toString()}
-"""
+            if(snapshot!= null) {
+                var result = ""
+                val items: Iterator<QueryDocumentSnapshot> = snapshot!!.iterator()
+                while (items.hasNext()) {
+                    val docdata = items.next()
+                    val data = docdata.data
+                    result += """${data["date"].toString()} ${data["title"].toString()} ${data["sentence"].toString()}
+    """
+                }
+                dataText?.setText(result)
             }
-            dataText?.setText(result)
         }
-         */
 
     }   //onCreate↑↑
 
@@ -84,7 +85,7 @@ class GachaDiaryFragment : Fragment() {
 
 
         //タイトルガチャ
-        var range = (list.indices)
+        var range = (list.indices + 1)
         var result = range.random()
         var resultTitle = list[result]
         binding.textGacha.setText(resultTitle)
