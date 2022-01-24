@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import java.util.*
 
 
 class CalenderFragment : Fragment() {
+    private lateinit var userId: String
 
     private var _binding: FragmentCalenderBinding? = null
     private val binding get() = _binding!!
@@ -25,9 +27,13 @@ class CalenderFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //ユーザーID取得
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
+
         //FirebaseApp.initializeApp(this)
         val db = Firebase.firestore
-        diary = db.collection("diary")
+        diary = db.collection("users")
 
         diary!!.addSnapshotListener { snapshot, e ->
             var result = ""

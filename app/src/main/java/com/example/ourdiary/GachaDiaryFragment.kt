@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,8 @@ class GachaDiaryFragment : Fragment() {
     private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
 
+    private lateinit var userId: String
+
     //ガチャの質問リスト
     val list : Array<String> = arrayOf(
         "いちばんたのしかったことは？",
@@ -53,7 +56,10 @@ class GachaDiaryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("diary")
+        diary = db!!.collection("users")
+
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {

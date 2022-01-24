@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -28,8 +29,8 @@ class RewriteDiaryActivity : AppCompatActivity() {
 
     private var db: FirebaseFirestore? = null
     private var diaryDb: CollectionReference? = null
-    private var get_id: String? = null
 
+    private lateinit var userId: String
 
     companion object {
         val KEY_STATE = "key_state"
@@ -56,6 +57,8 @@ class RewriteDiaryActivity : AppCompatActivity() {
         val db = Firebase.firestore
         diaryDb = db.collection("diary")
 
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
         //各気分のラジオボタンが選ばれた時に変数feelingTextに値を代入
         binding.radioGroupFeelings.setOnCheckedChangeListener { group, checkedId: Int ->
@@ -79,7 +82,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
         }
 
         binding.btnDelete.setOnClickListener {
-            diaryDb!!.document(diary.id).delete()
+            diaryDb!!.document(userId).delete()
                 .addOnCompleteListener(OnCompleteListener<Void?> { task ->
                     if (task.isSuccessful) {
                         Toast.makeText( this, "日記を削除（さくじょ）しました。",
@@ -104,7 +107,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
 
 
     fun doRewrite(view: View) {
-        diaryDb!!.document(diary.id).get().addOnCompleteListener{}
+        diaryDb!!.document(userId).get().addOnCompleteListener{}
 
         val date: String = binding.rewriteTextDate!!.getText().toString()
         val feel: String = feelingText.toString()
@@ -118,7 +121,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
         data["title"] = tit
         data["sentence"] = sen
 
-        diaryDb!!.document(diary.id).set(data)
+        diaryDb!!.document(userId).set(data)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(

@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class EditDiaryFragment : Fragment() {
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
 
+    private lateinit var userId: String
 
     private var db: FirebaseFirestore? = null
     private var diary: CollectionReference? = null
@@ -42,19 +44,13 @@ class EditDiaryFragment : Fragment() {
      */
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        /*
-        arguments?.let {
-            dateResId = it.getString(DATE_RES_ID)
-            titleResId = it.getString(TITLE_RES_ID)
-            sentenceResId = it.getString(SENTENCE_RES_ID)
-        }
-
-         */
 
         db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("diary")
+        diary = db!!.collection("users")
+
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {

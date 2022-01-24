@@ -1,6 +1,8 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,13 +40,25 @@ class MainActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailEditText, passEditText)
                     .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
+                                //ユーザーのIDをアプリ内に保存する処理↓↓
+                                // "DataStore"という名前でインスタンスを生成
+                                val dataStore: SharedPreferences = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+                                // ユーザーIDを取得
+                                val userId = auth.currentUser?.uid
+                                // 文字列を"UserId"に書き込む
+                                val editor = dataStore.edit()
+                                editor.putString("UserId", userId)
+                                // ユーザーIDを保存する
+                                editor.commit()
+
+
                                 Log.d("DEBUG", "登録できました。")
                                 Toast.makeText(baseContext, "登録できました。", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this, CalendarActivity::class.java)
                                 startActivity(intent)
                             } else if ( length < 6 ) {
                                 Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
-                                Toast.makeText(baseContext, "パスワードは6文字以上です。。", Toast.LENGTH_LONG).show()
+                                Toast.makeText(baseContext, "パスワードは6文字以上です。", Toast.LENGTH_LONG).show()
 
                             } else {
                                 Log.d("DEBUG", "createUserWithEmail:failure", task.exception)
@@ -68,6 +82,18 @@ class MainActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+
+                            //ユーザーIDを取得する処理↓↓
+                            // "DataStore"という名前でインスタンスを生成
+                            val dataStore: SharedPreferences = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+                            // ユーザーIDを取得
+                            val userId = auth.currentUser?.uid
+                            // 文字列を"UserId"に書き込む
+                            val editor = dataStore.edit()
+                            editor.putString("UserId", userId)
+                            // ユーザーIDを保存する
+                            editor.commit()
+
                             // ログイン成功
                             Toast.makeText(this@MainActivity, "ログインしました!!", Toast.LENGTH_SHORT)
                                 .show()

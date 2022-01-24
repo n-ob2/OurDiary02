@@ -1,5 +1,6 @@
 package com.example.ourdiary
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ class DiaryFragment : Fragment() {
     private var _binding: FragmentDiaryBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var userId: String
+
     private var dateText: TextView? = null
     private var titleText: TextView? = null
     private var diaryText: TextView? = null
@@ -36,7 +39,10 @@ class DiaryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val db = FirebaseFirestore.getInstance()
-        var diary = db.collection("diary")
+        var diary = db.collection("users")
+
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
         diary.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {

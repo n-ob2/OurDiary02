@@ -1,6 +1,7 @@
 package com.example.ourdiary
 
 //import android.content.Intent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -23,6 +24,8 @@ class CalendarActivity : AppCompatActivity() {
     private var diary: CollectionReference? = null
     private var dataText: EditText? = null
 
+    private lateinit var userId: String
+
     lateinit var mAdapter: DiaryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +40,12 @@ class CalendarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("diary")
+        //ユーザーID取得
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
+        db = FirebaseFirestore.getInstance()
+        diary = db!!.collection("users")
 
         diary!!.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
