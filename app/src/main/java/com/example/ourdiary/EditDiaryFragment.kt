@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+
 
 /*
 private var DATE_RES_ID = "DATE_RES_ID"
