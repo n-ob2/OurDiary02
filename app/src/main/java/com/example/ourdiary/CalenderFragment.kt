@@ -1,6 +1,6 @@
 package com.example.ourdiary
 
-import android.content.Context
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,8 +28,8 @@ class CalenderFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         //ユーザーID取得
-        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-        userId = data.getString("UserId", "").toString()
+        val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
+        userId = preferences?.getString("UserId", "").toString()
 
         //FirebaseApp.initializeApp(this)
         val db = Firebase.firestore

@@ -1,6 +1,6 @@
 package com.example.ourdiary
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import android.content.SharedPreferences
 
 class GachaDiaryFragment : Fragment() {
     private var _binding: FragmentGachaDiaryBinding?= null
@@ -59,8 +58,9 @@ class GachaDiaryFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("users")
 
-        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-        userId = data.getString("UserId", "").toString()
+        //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
+        userId = preferences?.getString("UserId", "").toString()
 
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {

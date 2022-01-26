@@ -1,6 +1,6 @@
 package com.example.ourdiary
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
@@ -51,8 +50,9 @@ class EditDiaryFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         diary = db!!.collection("users")
 
-        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-        userId = data.getString("UserId", "").toString()
+        //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
+        userId = preferences?.getString("UserId", "").toString()
 
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {
