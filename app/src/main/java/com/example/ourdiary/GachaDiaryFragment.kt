@@ -14,8 +14,9 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class GachaDiaryFragment : Fragment() {
     private var _binding: FragmentGachaDiaryBinding?= null
@@ -28,8 +29,10 @@ class GachaDiaryFragment : Fragment() {
     private var editTextAnswer: EditText? = null
     private var dataText: EditText? = null
 
-    private var db: FirebaseFirestore? =null
+    //private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
+
+    val db = Firebase.firestore
 
     private lateinit var userId: String
 
@@ -55,8 +58,8 @@ class GachaDiaryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("users")
+        //db = FirebaseFirestore.getInstance()
+        diary = db.collection("user").document(userId!!).collection("diary")
 
         //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
         val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)

@@ -11,8 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 /*
@@ -34,8 +35,10 @@ class EditDiaryFragment : Fragment() {
 
     private lateinit var userId: String
 
-    private var db: FirebaseFirestore? = null
+    //private var db: FirebaseFirestore? = null
     private var diary: CollectionReference? = null
+
+    val db = Firebase.firestore
 
     //arguments用のリソースID
     /*
@@ -47,8 +50,8 @@ class EditDiaryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("users")
+        //db = FirebaseFirestore.getInstance()
+        diary = db.collection("user").document(userId!!).collection("diary")
 
         //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
         val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
