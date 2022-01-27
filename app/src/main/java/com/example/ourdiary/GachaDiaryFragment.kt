@@ -29,12 +29,10 @@ class GachaDiaryFragment : Fragment() {
     private var editTextAnswer: EditText? = null
     private var dataText: EditText? = null
 
+    private lateinit var userId: String
     //private var db: FirebaseFirestore? =null
     private var diary: CollectionReference? = null
-
     val db = Firebase.firestore
-
-    private lateinit var userId: String
 
     //ガチャの質問リスト
     val list : Array<String> = arrayOf(

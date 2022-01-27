@@ -15,13 +15,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-
-/*
-private var DATE_RES_ID = "DATE_RES_ID"
-private var TITLE_RES_ID = "TITLE_RES_ID"
-private var SENTENCE_RES_ID = "SENTENCE_RES_ID"
-*/
-
 class EditDiaryFragment : Fragment() {
     private var _binding: FragmentEditDiaryBinding? = null
     private val binding get() = _binding!!
@@ -34,10 +27,8 @@ class EditDiaryFragment : Fragment() {
     private var dataText: EditText? = null
 
     private lateinit var userId: String
-
     //private var db: FirebaseFirestore? = null
     private var diary: CollectionReference? = null
-
     val db = Firebase.firestore
 
     //arguments用のリソースID
@@ -54,6 +45,7 @@ class EditDiaryFragment : Fragment() {
         diary = db.collection("user").document(userId!!).collection("diary")
 
         //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+
         val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
         userId = preferences?.getString("UserId", "").toString()
 
