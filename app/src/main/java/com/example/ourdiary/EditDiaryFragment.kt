@@ -1,6 +1,7 @@
 package com.example.ourdiary
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -44,7 +45,7 @@ class EditDiaryFragment : Fragment() {
         //db = FirebaseFirestore.getInstance()
         diary = db.collection("user").document(userId!!).collection("diary")
 
-        //val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        val data = context?.getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
 
         val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
         userId = preferences?.getString("UserId", "").toString()
