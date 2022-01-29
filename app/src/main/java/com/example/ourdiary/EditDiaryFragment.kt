@@ -27,7 +27,8 @@ class EditDiaryFragment : Fragment() {
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
 
-    private lateinit var userId: String
+    private var userId: String? = null
+
     //private var db: FirebaseFirestore? = null
     private var diary: CollectionReference? = null
     val db = Firebase.firestore
