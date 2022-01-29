@@ -1,7 +1,6 @@
 package com.example.ourdiary
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -58,12 +56,13 @@ class GachaDiaryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         //db = FirebaseFirestore.getInstance()
-        diary = db.collection("user").document(userId!!).collection("diary")
+        //diary = db.collection("UserList").document(userId!!).collection("diary")
 
-        val data = context?.getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-        val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
+        //val data = context?.getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        val preferences = context?.getSharedPreferences("UserIdDataStore", Activity.MODE_PRIVATE)
         userId = preferences?.getString("UserId", "").toString()
 
+        /*
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {
                 var result = ""
@@ -77,6 +76,7 @@ class GachaDiaryFragment : Fragment() {
                 dataText?.setText(result)
             }
         }
+        */
 
     }   //onCreate↑↑
 
@@ -152,6 +152,9 @@ class GachaDiaryFragment : Fragment() {
         data["weather"] = weather
         data["title"] = tit
         data["sentence"] = sen
+
+        diary = db.collection("UserList").document(userId!!).collection("diary")
+
         diary!!.add(data)
             .addOnSuccessListener(OnSuccessListener<DocumentReference?> {
                 Toast.makeText(

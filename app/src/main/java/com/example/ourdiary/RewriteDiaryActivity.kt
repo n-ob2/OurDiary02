@@ -26,6 +26,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
     private var titleText: EditText? = null
     private var sentenceText: EditText? = null
     private var dataText: EditText? = null
+    private var diaryId: String? =null
 
     private var db: FirebaseFirestore? = null
     private var diaryDb: CollectionReference? = null
@@ -48,17 +49,18 @@ class RewriteDiaryActivity : AppCompatActivity() {
         diary = Gson().fromJson<Diary>(stateStr, Diary::class.java)
         //変数diaryの中に諸々の日記データが格納されているから、EditText内にセットする。
 
+        diaryId = diary.id
+
         binding.rewriteTextDate.setText(diary.date)
         binding.rewriteTextTitle.setText(diary.title)
         binding.rewriteTextSentence.setText(diary.sentence)
 
+        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+        userId = data.getString("UserId", "").toString()
 
         //FirebaseApp.initializeApp(this)
         val db = Firebase.firestore
-        diaryDb = db.collection("diary")
-
-        val data = getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-        userId = data.getString("UserId", "").toString()
+        diaryDb = db.collection("UserList").document(userId!!).collection("diary")
 
         //各気分のラジオボタンが選ばれた時に変数feelingTextに値を代入
         binding.radioGroupFeelings.setOnCheckedChangeListener { group, checkedId: Int ->
@@ -82,7 +84,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
         }
 
         binding.btnDelete.setOnClickListener {
-            diaryDb!!.document(userId).delete()
+            diaryDb!!.document(diaryId!!).delete()
                 .addOnCompleteListener(OnCompleteListener<Void?> { task ->
                     if (task.isSuccessful) {
                         Toast.makeText( this, "日記を削除（さくじょ）しました。",
@@ -107,7 +109,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
 
 
     fun doRewrite(view: View) {
-        diaryDb!!.document(userId).get().addOnCompleteListener{}
+        //diaryDb!!.document(userId).get().addOnCompleteListener{}
 
         val date: String = binding.rewriteTextDate!!.getText().toString()
         val feel: String = feelingText.toString()
@@ -121,7 +123,7 @@ class RewriteDiaryActivity : AppCompatActivity() {
         data["title"] = tit
         data["sentence"] = sen
 
-        diaryDb!!.document(userId).set(data)
+        diaryDb!!.document(diaryId!!).set(data)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(

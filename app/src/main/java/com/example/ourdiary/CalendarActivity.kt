@@ -45,7 +45,7 @@ class CalendarActivity : AppCompatActivity() {
         userId = data.getString("UserId", "").toString()
 
         db = FirebaseFirestore.getInstance()
-        diary = db!!.collection("users")
+        diary = db!!.collection("UserList").document(userId!!).collection("diary")
 
         diary!!.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {

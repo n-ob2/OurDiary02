@@ -1,7 +1,6 @@
 package com.example.ourdiary
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ourdiary.databinding.FragmentEditDiaryBinding
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -43,14 +41,16 @@ class EditDiaryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //db = FirebaseFirestore.getInstance()
-        diary = db.collection("user").document(userId!!).collection("diary")
-
-        val data = context?.getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
-
-        val preferences = context?.getSharedPreferences("userInfo", Activity.MODE_PRIVATE)
+        val preferences = context?.getSharedPreferences("UserIdDataStore", Activity.MODE_PRIVATE)
         userId = preferences?.getString("UserId", "").toString()
 
+        //db = FirebaseFirestore.getInstance()
+        //diary = db.collection("UserList").document(userId!!).collection("diary")
+
+        //val data = context?.getSharedPreferences("UserIdDataStore", Context.MODE_PRIVATE)
+
+
+        /*
         diary!!.addSnapshotListener { snapshot, e ->
             if(snapshot!= null) {
                 var result = ""
@@ -64,6 +64,7 @@ class EditDiaryFragment : Fragment() {
                 dataText?.setText(result)
             }
         }
+         */
 
     }   //onCreate↑↑
 
@@ -130,6 +131,9 @@ class EditDiaryFragment : Fragment() {
         data["weather"] = weather
         data["title"] = tit
         data["sentence"] = sen
+
+        diary = db.collection("UserList").document(userId!!).collection("diary")
+
         diary!!.add(data)
             .addOnSuccessListener{
                 Toast.makeText(
