@@ -9,7 +9,7 @@ android {
     buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "com.example.ourdiary"
+        applicationId "com.n_ob2.ourdiary"
         minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
